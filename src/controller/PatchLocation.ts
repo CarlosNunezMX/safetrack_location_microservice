@@ -1,6 +1,7 @@
 import { Context } from "hono";
 import { Env } from "../infrastructure/getSession";
 import PatchLocation from "../application/patch";
+import MakeHttpResponse from "../shared/httpResponse";
 interface Validation {
     in: {
         json: {
@@ -21,10 +22,7 @@ const PatchLocationController = (action: PatchLocation) =>
         const user = c.get("user")!;
         const body = c.req.valid("json")!;
         const res = await action.execute(user.id, body.x, body.y);
-        return c.json({
-            ok: true,
-            response: res
-        });
+        return MakeHttpResponse(c, res, 200);
     }
 
 export default PatchLocationController;
