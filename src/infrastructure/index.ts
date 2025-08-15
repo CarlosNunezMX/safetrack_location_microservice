@@ -12,11 +12,8 @@ class Constants {
     private readonly transformer: LocationEncryption; 
     public readonly locationRepo: LocationRepo;
     constructor() {
+        console.log(env)
         const { SUPABASE_URL, SUPABASE_KEY, LOCATION_KEY } = env;
-        if (!SUPABASE_KEY || !SUPABASE_URL)
-            throw "Set SUPABASE_KEY and SUPABASE_URL before start project!";
-        if(!LOCATION_KEY)
-            throw "Set location encryption key before!";
         this.LocationKey = LOCATION_KEY;
         this.SupabaseKey = SUPABASE_KEY;
         this.SupabaseUrl = SUPABASE_URL;
