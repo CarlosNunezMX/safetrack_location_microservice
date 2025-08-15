@@ -2,6 +2,7 @@ import LocationRepo from "../domain/Location.repo";
 import SupabaseConnection from "../supabase";
 import LocationEncryption from "./Encrypt";
 import LocationSupabaseRepo from "./Location.repo";
+import {env} from "cloudflare:workers"
 
 class Constants {
     private readonly SupabaseKey: string;
@@ -11,7 +12,7 @@ class Constants {
     private readonly transformer: LocationEncryption; 
     public readonly locationRepo: LocationRepo;
     constructor() {
-        const { SUPABASE_URL, SUPABASE_KEY, LOCATION_KEY } = process.env;
+        const { SUPABASE_URL, SUPABASE_KEY, LOCATION_KEY } = env;
         if (!SUPABASE_KEY || !SUPABASE_URL)
             throw "Set SUPABASE_KEY and SUPABASE_URL before start project!";
         if(!LOCATION_KEY)
